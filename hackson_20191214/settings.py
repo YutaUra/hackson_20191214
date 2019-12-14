@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crud',
-    # 'app',
+    'user',
 ]
+
+AUTH_USER_MODEL = 'user.User'
+LOGIN_URL = 'register : login'
+LOGIN_REDIRECT_URL = 'register : top'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
