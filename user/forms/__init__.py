@@ -24,7 +24,7 @@ class UserForm(UserCreationForm):
             9: 'sep', 10: 'oct', 11: 'nov', 12: 'dec'
         }
         widgets = {
-            'birthday': SelectDateWidget(months=MONTHS, years=[x for x in range(19, 2030)])
+            'birthday': SelectDateWidget(months=MONTHS, years=[x for x in range(2020, 1900)])
         }
 
 
