@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     Create
-    <form class="form" action="" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button class="btn btn-primary">submit</button>
+        <button>submit</button>
     </form>
 {% endblock %}
