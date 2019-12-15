@@ -21,7 +21,7 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, username, email=None, password=None, **extra_fields):
+    def create_superuser(self, username='admin', email=None, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         if extra_fields.get('is_staff') is not True:
@@ -32,8 +32,10 @@ class CustomUserManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=100)
-    birthday = models.DateField()
+    name = models.CharField(max_length=100, null=True,
+                            )
+    birthday = models.DateField(null=True,
+                                )
     gender_choices = (
         ('1', '女性'),
         ('2', '男性'),
@@ -43,7 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(
         max_length=1,
         choices=gender_choices,
-        default=4
+        default=4,
+        null=True,
     )
     email = models.EmailField(max_length=100, unique=True)
 
@@ -52,6 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=False,
         help_text=(
             'Designates whether the user can log into this admin site.'),
+        null=True,
     )
     is_active = models.BooleanField(
         'active',
