@@ -1,4 +1,4 @@
-{% extends "crud/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% block content %}
     <div>
@@ -9,8 +9,14 @@
         {% endfor %}
         <p>{% trans 'created_at' %}:{{ object.created_at }}</p>
         <p>{% trans 'updated_at' %}:{{ object.updated_at }}</p>
+        {% if object.owner == user %}
+        <p>あなたがオーナーです</p>
+        {% elif user in object.participant.all %}
+        <p>あなたは参加者です</p>
+        {% else %}
         <a href="{% url 'room:join' room_pk=object.pk %}">参加する</a>
+        {% endif %}
         <a href="javascript:void(0);" onclick="window.history.back();">{% trans 'return' %}</a>
     </div>
-    <a href="{% url 'list' %}">{% trans 'list' %}</a>
+    <a href="{% url 'room:list' %}">{% trans 'list' %}</a>
 {% endblock %}

@@ -3,13 +3,19 @@ from django.forms import ModelForm, SelectDateWidget
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.forms import (
-    AuthenticationForm
+    AuthenticationForm, UserCreationForm
 )
 
 User = get_user_model()
 
 
-class UserForm(ModelForm):
+class UserForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
     class Meta:
         model = User
         fields = ('name','birthday', 'gender', 'email')

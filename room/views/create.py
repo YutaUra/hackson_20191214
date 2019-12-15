@@ -23,3 +23,4 @@ class RoomCreateView(CreateView):
         self.object.owner = self.request.user
         self.object.save()
         return super().form_valid(form)
+
