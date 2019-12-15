@@ -1,0 +1,98 @@
+地図
+<div id="map"></div>
+
+<script type="text/javascript">
+    var rosen;
+
+    function init() {
+        rosen = new Rosen("map", {
+            apiKey: "eBBWPyXMYduCN759",
+            apiSetting: "https",
+            tileSetting: "https",
+            centerStation: 27725,
+            zoom: 13,
+        });
+        const places = [
+            {
+                lat: 34.215207,
+                lng: 134.018567,
+                name: '高松空港',
+            }
+        ];
+        for (let i = 0; i < 10; i++) {
+            places.push({
+                lat: 34 + Math.random() * 0.001,
+                lng: 134 + Math.random() * 0.001,
+                name: `place${i}`,
+            })
+        }
+        places.forEach(place => {
+            addMarker(
+                place.lat,
+                place.lng,
+                L.popup().setContent(`<p>${place.name}</p>`)
+            )
+        })
+    }
+
+    // 緯度経度から擬似的に路線図にマークする関数
+    function addMarker(lat, lng, popup) {
+        var limit = 3;
+        rosen.getNearestStations({
+            latitude: lat,
+            longitude: lng,
+            range: 100000,
+            limit: limit
+        }).then(function (rows) {
+            console.log("rows", rows);
+            if (rows.length < limit) {
+                // alert('最寄り駅を' + limit + '個以上取得できなかったため、座標を近似できません。');
+                console.log('最寄り駅を' + limit + '個以上取得できなかったため、座標を近似できません。');
+                return;
+            }
+            var map = rosen.getMap();   // LeafletのMapオブジェクトを取得
+            var zoom = map.getZoom();
+            var points = rows.map(function (row) {
+                try {
+                    var station = row.station;
+                    var coord = rosen._getStationCenterPositionWithZoom(station, station.max_zoom); // Leaflet内部座標を取得
+                    var projected_coord = map.project(coord, zoom); // 路線図で使う座標に変換
+                    return {
+                        station_code: station.code,
+                        station_name: station.name,
+                        lat: station.latitude,
+                        lng: station.longitude,
+                        px: projected_coord.x,
+                        py: projected_coord.y,
+                    };
+                } catch (e) {
+                    console.error(e);
+                    alert(e.message);
+                }
+            });
+            console.table(points);
+            // デバッグ用に最寄り駅にマーカーを設置
+            //points.forEach(function(point) {
+            //rosen.setMarkerAt([point.px, point.py, zoom]);
+            //});
+            // 座標を近似
+            var p = {
+                x: lerp(points[0].lat, points[0].px, points[1].lat, points[1].px, lat),
+                y: lerp(points[0].lng, points[0].py, points[1].lng, points[1].py, lng),
+            };
+            rosen.setMarkerAt([p.x, p.y, zoom]).then(function (marker) {
+                // ポップアップを設定する
+                marker.bindPopup(popup);
+            });
+        });
+    }
+
+    // 線形補間
+    function lerp(x1, y1, x2, y2, x) {
+        return y1 + ((y2 - y1) / (x2 - x1)) * (x - x1);
+    }
+
+    // ここまで--------------------------------------------------------------------------
+    window.addEventListener('load', init);
+
+</script>
