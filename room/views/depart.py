@@ -3,4 +3,6 @@
 from django.views.generic import TemplateView
 from room.models import Room
 
-class DepartView(TemplateView)
+class DepartView(TemplateView):
+    model = Room
+    template_name = 'room/depart.html'
