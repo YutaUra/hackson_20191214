@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
+{% if user.current_room %}
+{% else %}
+<a href="{% url 'room:create' %}">作成する</a>
+{% endif %}
     <div>
         {% for object in object_list %}
             <div class="card" style="width: 18rem;">
