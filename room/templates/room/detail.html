@@ -12,5 +12,5 @@
         <a href="{% url 'room:join' room_pk=object.pk %}">参加する</a>
         <a href="javascript:void(0);" onclick="window.history.back();">{% trans 'return' %}</a>
     </div>
-    <a href="{% url 'list' %}">{% trans 'list' %}</a>
+    <a href="{% url 'room:list' %}">{% trans 'list' %}</a>
 {% endblock %}
