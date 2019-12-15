@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/<pk>/', v.RoomDeleteView.as_view(), name='delete'),
     path('join/<room_pk>/', v.JoinView.as_view(), name='join'),
     path('myroom/', v.MyRoomView.as_view(), name='myroom'),
+    path('depart/<pk>/', v.DepartView.as_view(), name='depart'),
 ]

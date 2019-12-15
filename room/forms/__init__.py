@@ -8,6 +8,7 @@ class RoomForm(ModelForm):
         model = Room
         fields = (
             'name',
+            'place',
             'object_nature',
             'object_bath',
             'object_gourmet',

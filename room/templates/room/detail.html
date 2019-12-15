@@ -11,7 +11,7 @@
         <p>{% trans 'updated_at' %}:{{ object.updated_at }}</p>
         {% if object.owner == user %}
         <p>あなたがオーナーです</p>
-        <button>Develop</button>
+        <a href="{% url 'room:depart' pk=object.pk %}">{% trans 'depart' %}</a>
         {% elif user in object.participant.all %}
         <p>あなたは参加者です</p>
         {% elif user.current_room %}

@@ -5,3 +5,4 @@ from .update import RoomUpdateView
 from .delete import RoomDeleteView
 from .join import JoinView
 from .my_room import MyRoomView
+from .depart import DepartView
