@@ -26,9 +26,9 @@
         <a class="nav-link" href="{% url 'room:list' %}">Room List <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-      {#{% if ユーザーが参加者 %}#}
-      {#<a class="nav-link" href="{% url 'room:myroom' %}">My Room</a>#}
-      {#{% endif %}#}
+      {% if user.current_room %}
+      <a class="nav-link" href="{% url 'room:myroom' %}">My Room</a>
+      {% endif %}
       </li>
     </ul>
   </div>
