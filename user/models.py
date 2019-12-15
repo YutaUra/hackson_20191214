@@ -85,3 +85,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def current_room(self):
+        from room.models import Room
+        try:
+            room = Room.objects.get(owner=self)
+        except Room.DoesNotExist:
+            try:
+                room = Room.objects.get(participant__contains=[self])
+            except Room.DoesNotExist:
+                return False
+        return room

@@ -11,7 +11,6 @@ class JoinView(TemplateView):
         if request.user.is_authenticated:
             room = get_object_or_404(Room, pk=kwargs.get('room_pk'))
             room.participant.add(request.user)
-            room.owner.send_emai(f'{request.user}さんが{room}に参加しました！')
             room.save()
             return super().get(request, *args, **kwargs)
         return redirect('user:create')
