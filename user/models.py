@@ -87,12 +87,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def current_room(self):
-        from room.models import Room
         try:
-            room = Room.objects.get(owner=self)
-        except Room.DoesNotExist:
+            room = self.owner.all()[0]
+        except IndexError:
             try:
-                room = Room.objects.get(participant__contains=[self])
-            except Room.DoesNotExist:
+                room = self.participant.all()[0]
+            except IndexError:
                 return False
         return room
