@@ -11,12 +11,12 @@ class RoomCreateView(CreateView):
     template_name = 'room/create.html'
 
     def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             return super().get(request, *args, **kwargs)
         return redirect('user:create')
 
     def get_success_url(self):
-        return reverse('detail', kwargs={'pk': self.object.pk})
+        return reverse('room:detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         self.object = form.save()

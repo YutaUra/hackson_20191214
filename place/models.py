@@ -26,29 +26,46 @@ class Filter(models.Model):
         HIGH = 'high'
 
     object_nature = models.BooleanField(
-        '自然や景勝地',
+        '自然や景勝地',        default=False,
+
     )
     object_bath = models.BooleanField(
-        '温泉',
+        '温泉',        default=False,
+
     )
     object_gourmet = models.BooleanField(
-        'グルメ',
+        'グルメ',        default=False,
+
     )
     object_historic = models.BooleanField(
-        '歴史・文化的遺産',
+        '歴史・文化的遺産',        default=False,
+
     )
-    object_ = models.BooleanField(
-        '自然や景勝地',
-    )object_nature = models.BooleanField(
-        '自然や景勝地',
-    )object_nature = models.BooleanField(
-        '自然や景勝地',
-    )object_nature = models.BooleanField(
-        '自然や景勝地',
-    )object_nature = models.BooleanField(
-        '自然や景勝地',
-    )object_nature = models.BooleanField(
-        '自然や景勝地',
+    object_shopping = models.BooleanField(
+        'ショッピング',        default=False,
+
+    )
+    object_zoo_aquarium = models.BooleanField(
+        '動物園・水族館',        default=False,
+
+    )
+    object_art = models.BooleanField(
+        '美術館・博物館',        default=False,
+
+    )
+    object_sport = models.BooleanField(
+        'スポーツ・アクティビティ',
+        default=False,
+
+    )
+    object_other = models.BooleanField(
+        'その他',
+        default=False,
+
+    )
+    object_any = models.BooleanField(
+        '何でもよい',
+        default=False,
     )
     mood = models.CharField(
         max_length=4,

@@ -1,6 +1,7 @@
 from django.urls import path
 from room import views as v
 
+app_name = 'room'
 urlpatterns = [
     path('create/', v.RoomCreateView.as_view(), name='create'),
     path('detail/<pk>/', v.RoomDetailView.as_view(), name='detail'),

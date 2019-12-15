@@ -8,7 +8,7 @@ User = get_user_model()
 class Room(Filter):
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name='owner')
-    participant = models.ManyToManyField(to=User, related_name='participant')
+    participant = models.ManyToManyField(to=User, related_name='participant',blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
