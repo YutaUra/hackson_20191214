@@ -4,6 +4,8 @@ from django.db import models
 class Place(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
+    lat = models.FloatField(null=True)
+    lng = models.FloatField(null=True)
 
     min_time = models.PositiveIntegerField()
     max_time = models.PositiveIntegerField()

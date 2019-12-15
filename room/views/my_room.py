@@ -7,5 +7,5 @@ class MyRoomView(RedirectView):
         user = self.request.user
         room = user.current_room()
         if room:
-            return reverse('room:detail', pk=room.pk)
+            return reverse('room:detail', kwargs={'pk':room.pk})
         return reverse('room:list')

@@ -11,8 +11,11 @@
         <p>{% trans 'updated_at' %}:{{ object.updated_at }}</p>
         {% if object.owner == user %}
         <p>あなたがオーナーです</p>
+        <button>Develop</button>
         {% elif user in object.participant.all %}
         <p>あなたは参加者です</p>
+        {% elif user.current_room %}
+        <p>あなたは他のルームに参加しています</p>
         {% else %}
         <a href="{% url 'room:join' room_pk=object.pk %}">参加する</a>
         {% endif %}
