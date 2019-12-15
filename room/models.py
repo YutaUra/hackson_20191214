@@ -11,6 +11,7 @@ class Room(Filter):
     participant = models.ManyToManyField(to=User, related_name='participant',blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_open = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name

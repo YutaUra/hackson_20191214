@@ -10,4 +10,4 @@ class UserCreateView(CreateView):
     template_name = 'user/create.html'
 
     def get_success_url(self):
-        return reverse('detail', kwargs={'pk': self.object.pk})
+        return reverse('user:detail', kwargs={'pk': self.object.pk})
