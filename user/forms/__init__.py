@@ -19,9 +19,9 @@ class UserForm(UserCreationForm):
         model = User
         fields = ('name', 'birthday', 'gender', 'email')
         MONTHS = {
-            1: 'jan', 2: 'feb', 3: 'mar', 4: 'apr',
-            5: 'may', 6: 'jun', 7: 'jul', 8: 'aug',
-            9: 'sep', 10: 'oct', 11: 'nov', 12: 'dec'
+            1: 'January', 2: 'February', 3: 'March', 4: 'April',
+            5: 'May', 6: 'June', 7: 'July', 8: 'August',
+            9: 'September', 10: 'October', 11: 'November', 12: 'December'
         }
         widgets = {
             'birthday': SelectDateWidget(months=MONTHS, years=[x for x in range(2020, 1900, -1)])
