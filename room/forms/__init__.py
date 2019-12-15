@@ -24,5 +24,5 @@ class RoomForm(ModelForm):
             'object_other',
             'object_any',
             'mood',
-
+            'option',
         )
